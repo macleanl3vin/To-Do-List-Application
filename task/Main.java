@@ -17,7 +17,6 @@ public class Main {
         task task13 = new task("Pay bills", "2024-03-31", "High");
         task task14 = new task("Attend workshop", "2024-04-03", "Medium");
         task task15 = new task("Take out trash", "2024-03-26", "Low");
-        
 
         ToDoList exampleToDoList = new ToDoList();
         exampleToDoList.addTask(task1);
@@ -27,22 +26,12 @@ public class Main {
         exampleToDoList.addTask(task5);
         exampleToDoList.addTask(task6);
         exampleToDoList.addTask(task7);
-        exampleToDoList.addTask(task8);
-        exampleToDoList.addTask(task9);
-        exampleToDoList.addTask(task10);
-        exampleToDoList.addTask(task11);
-        exampleToDoList.addTask(task12);
-        exampleToDoList.addTask(task13);
-        exampleToDoList.addTask(task14);
-        exampleToDoList.addTask(task15);
 
-    
-        //print example to do list
-        exampleToDoList.printToDoList();
+        // print example to do list
+        // exampleToDoList.delete("Hw");
 
+        System.out.println(exampleToDoList.search("Hw"));
 
-    
-    
-    
+        // exampleToDoList.printToDoList();
     }
 }

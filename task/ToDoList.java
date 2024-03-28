@@ -25,6 +25,41 @@ public class ToDoList {
         }
     }
 
+    // Turn into a search method
+    public task search(String taskName) {
+        for (int i = 0; i < todoList.length; i++) {
+            ArrayList<task> tasks = todoList[i];
+            for (int j = 0; j < tasks.size(); j++) {
+                task currentTask = tasks.get(j);
+                if (currentTask.getName().equals(taskName)) {
+                    return currentTask;
+                }
+            }
+        }
+        System.out.println("Task '" + taskName + "' not found.");
+        return null;
+    }
+
+    // Turn into a search method
+    public void delete(String taskName) {
+        int j;
+        for (int i = 0; i < todoList.length;) {
+            ArrayList<task> tasks = todoList[i];
+            for (j = 0; j < tasks.size(); j++) {
+                task currentTask = tasks.get(j);
+                if (currentTask.getName().equals(taskName)) {
+                    break;
+                }
+            }
+            for (int k = j; k < tasks.size() - 1; k++) {
+                todoList[i].set(k, todoList[i].get(k + 1));
+            }
+            todoList[i].remove(tasks.size() - 1);
+            return;
+        }
+        System.out.println("Task '" + taskName + "' not found.");
+    }
+
     private int getPriorityIndex(String priorityLevel) {
         switch (priorityLevel.toLowerCase()) {
             case "high":
@@ -44,9 +79,7 @@ public class ToDoList {
                 System.out.println(task.toString()); // Utilize toString() method here
             }
             System.out.println("Total tasks in Priority Level " + i + ": " + todoList[i].size());
-
         }
-
     }
 
 }

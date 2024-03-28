@@ -1,5 +1,7 @@
 package task;
 
+import java.util.ArrayList;
+
 public class task {
     private String name;
     private String dueDate;
@@ -33,6 +35,19 @@ public class task {
 
     public void setPriorityLevel(String priorityLevel) {
         this.priorityLevel = priorityLevel;
+    }
+
+    // Delete method to remove task
+    public static void delete(ArrayList<task> tasks, String taskName) {
+        for (int i = 0; i < tasks.size(); i++) {
+            task currentTask = tasks.get(i);
+            if (currentTask.getName().equals(taskName)) {
+                tasks.remove(i);
+                System.out.println("Task '" + taskName + "' deleted successfully.");
+                return;
+            }
+        }
+        System.out.println("Task '" + taskName + "' not found.");
     }
 
     @Override
