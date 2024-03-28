@@ -40,6 +40,10 @@ public class Main {
         //print example to do list
         exampleToDoList.printToDoList();
 
+        
+        exampleToDoList.alphabetSort("high");
+
+
 
     
     

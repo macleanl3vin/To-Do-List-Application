@@ -51,10 +51,11 @@ public class ToDoList {
         
     }
 
-
-
-        
-
+    public ArrayList<task> getOneList(String string) {
+        int currentArray = getPriorityIndex(string);
+        return todoList[currentArray];
+    }
+    
     
 }
 
