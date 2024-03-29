@@ -51,6 +51,12 @@ public class ToDoList {
         
     }
 
+    public ArrayList<task> getOneList(String string) {
+        int currentArray = getPriorityIndex(string);
+        return todoList[currentArray];
+    }
+    
+
    //sorting by date soonest first and put into temp array and then print that.
     public void sortByDateThenPrint() {
         ArrayList<task> temp = new ArrayList<task>();

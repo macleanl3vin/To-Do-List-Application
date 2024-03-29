@@ -41,6 +41,10 @@ public class Main {
         //exampleToDoList.printToDoList();
         exampleToDoList.sortByDateThenPrint();
 
+        
+        exampleToDoList.alphabetSort("high");
+
+
 
     
     
