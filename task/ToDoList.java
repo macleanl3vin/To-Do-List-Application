@@ -147,30 +147,11 @@ public class ToDoList {
         int currentArray = getPriorityIndex(string);
         return todoList[currentArray];
     }
-
-    // sorting by date soonest first and put into temp array and then print that.
-    public void sortByDateThenPrint() {
-        ArrayList<task> temp = new ArrayList<task>();
-        for (int i = 0; i < 3; i++) {
-            for (task task : todoList[i]) {
-                temp.add(task);
-            }
-        }
-        // bubble sort temp list by the date
-        for (int i = 0; i < temp.size(); i++) {
-            for (int j = 0; j < temp.size() - 1; j++) {
-                if (temp.get(j).getDueDate().compareTo(temp.get(j + 1).getDueDate()) > 0) {
-                    task tempTask = temp.get(j);
-                    temp.set(j, temp.get(j + 1));
-                    temp.set(j + 1, tempTask);
-                }
-            }
-        }
-        // print sorted list
-        for (task task : temp) {
-            System.out.println(task.toString());
-        }
-
+    //date sort methods
+    //takes either high,med,low, or all as a parameter and then sorts tasks matching that priority by date and prints
+    public void sortTasksByDate(String priorityLevel) {
+        DateSort.sortByDateThenPrint(todoList, priorityLevel);
     }
+
 
 }
