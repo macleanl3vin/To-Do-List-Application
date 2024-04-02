@@ -1,5 +1,7 @@
 package task;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
         task task1 = new task("Hw", "2024-03-30", "Low");
@@ -17,7 +19,6 @@ public class Main {
         task task13 = new task("Pay bills", "2024-03-31", "High");
         task task14 = new task("Attend workshop", "2024-04-03", "Medium");
         task task15 = new task("Take out trash", "2024-03-26", "Low");
-        
 
         ToDoList exampleToDoList = new ToDoList();
         exampleToDoList.addTask(task1);
@@ -36,18 +37,18 @@ public class Main {
         exampleToDoList.addTask(task14);
         exampleToDoList.addTask(task15);
 
-    
-        //print example to do list
-        //exampleToDoList.printToDoList();
-        exampleToDoList.sortByDateThenPrint();
+        // ArrayList<task> temp = exampleToDoList.getOneList("high");
 
-        
-        exampleToDoList.alphabetSort("high");
+        // print sorted list
+        // for (task task : temp) {
+        // System.out.println(task.toString());
+        // }
+        exampleToDoList.sortByPriority("low");
+        exampleToDoList.printToDoList();
 
+        // exampleToDoList.sortByDateThenPrint();
+        // System.out.println(exampleToDoList.search("Pay bills"));
+        // exampleToDoList.alphabetSort("high");
 
-
-    
-    
-    
     }
 }

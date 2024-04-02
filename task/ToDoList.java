@@ -1,5 +1,7 @@
 package task;
 
+import java.util.Collections;
+
 import java.util.ArrayList;
 
 public class ToDoList {
@@ -24,7 +26,7 @@ public class ToDoList {
         }
     }
 
-    // Turn into a search method
+    // Search method that returns the task
     public task search(String taskName) {
         for (int i = 0; i < todoList.length; i++) {
             ArrayList<task> tasks = todoList[i];
@@ -38,19 +40,8 @@ public class ToDoList {
         System.out.println("Task '" + taskName + "' not found.");
         return null;
     }
-    
-    //asdsadasd
-    ///asdasd
-    //asdasdsad
 
-    // sadjhkjhasd
-    // oiashdohasd
-
-    // aisdoo
-    // asd
-    // asdasd
-
-    // Turn into a search method
+    // Delete method that deletes specified task
     public void delete(String taskName) {
         int j;
         for (int i = 0; i < todoList.length;) {
@@ -92,6 +83,64 @@ public class ToDoList {
 
         }
 
+    }
+
+    public void sortByPriority(String priorityLevel) {
+        int priorityIndex = getPriorityIndex(priorityLevel);
+        if (priorityIndex != -1) {
+            ArrayList<ArrayList<task>> sortedList = new ArrayList<>();
+            for (int i = 0; i < 3; i++) {
+                sortedList.add(new ArrayList<task>());
+            }
+
+            // For high priority tasks
+            if (priorityIndex == 0) {
+                for (int i = 0; i < 3; i++) {
+                    for (task task : todoList[i]) {
+                        if (task.getPriorityLevel().equalsIgnoreCase("high")) {
+                            sortedList.get(0).add(task);
+                        } else if (task.getPriorityLevel().equalsIgnoreCase("medium")) {
+                            sortedList.get(1).add(task);
+                        } else if (task.getPriorityLevel().equalsIgnoreCase("low")) {
+                            sortedList.get(2).add(task);
+                        }
+                    }
+                }
+            }
+            // for medium priority, not sure how we want to sort this....
+            else if (priorityIndex == 1) {
+                for (int i = 0; i < 3; i++) {
+                    for (task task : todoList[i]) {
+                        if (task.getPriorityLevel().equalsIgnoreCase("low")) {
+                            sortedList.get(0).add(task);
+                        } else if (task.getPriorityLevel().equalsIgnoreCase("medium")) {
+                            sortedList.get(1).add(task);
+                        } else if (task.getPriorityLevel().equalsIgnoreCase("high")) {
+                            sortedList.get(2).add(task);
+                        }
+                    }
+                }
+            }
+            // low priority tasks
+            else if (priorityIndex == 2) {
+                for (int i = 0; i < 3; i++) {
+                    for (task task : todoList[i]) {
+                        if (task.getPriorityLevel().equalsIgnoreCase("low")) {
+                            sortedList.get(0).add(task);
+                        } else if (task.getPriorityLevel().equalsIgnoreCase("medium")) {
+                            sortedList.get(1).add(task);
+                        } else if (task.getPriorityLevel().equalsIgnoreCase("high")) {
+                            sortedList.get(2).add(task);
+                        }
+                    }
+                }
+            }
+
+            // replace the original unsorted todoList with the sorted one recently made
+            todoList = sortedList.toArray(new ArrayList[3]);
+        } else {
+            System.out.println("Invalid priority level");
+        }
     }
 
     public ArrayList<task> getOneList(String string) {
