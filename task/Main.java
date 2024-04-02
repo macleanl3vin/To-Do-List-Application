@@ -45,8 +45,16 @@ public class Main {
         // }
         exampleToDoList.sortByPriority("low");
         exampleToDoList.printToDoList();
+                
+        /*  
+            datesorting
 
-        // exampleToDoList.sortByDateThenPrint();
+        //exampleToDoList.sortTasksByDate("high");
+        //exampleToDoList.sortTasksByDate("low");
+        //exampleToDoList.sortTasksByDate("medium");
+        //exampleToDoList.sortTasksByDate("all");     
+        */
+
         // System.out.println(exampleToDoList.search("Pay bills"));
         // exampleToDoList.alphabetSort("high");
 
