@@ -6,11 +6,13 @@ import java.util.ArrayList;
 public class DateSort {
     
 
-    public static void sortByDateThenPrint(ArrayList<task>[] todoList, String priorityLevel) {
-        ArrayList<task> temp = new ArrayList<>();
-        for (ArrayList<task> taskList : todoList) {
-            temp.addAll(taskList);
-        }
+        public static void sortByDateThenPrint(ArrayList<task>[] todoList, String priorityLevel) {
+            ArrayList<task> temp = new ArrayList<task>();
+            for (int i = 0; i < todoList.length; i++) {
+                for (task task : todoList[i]) {
+                    temp.add(task);
+                }
+            }
     
         // Bubble sort temp list by the due date
         int n = temp.size();
