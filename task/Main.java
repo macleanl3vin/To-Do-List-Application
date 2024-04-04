@@ -1,6 +1,6 @@
 package task;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -43,8 +43,12 @@ public class Main {
         // for (task task : temp) {
         // System.out.println(task.toString());
         // }
-        exampleToDoList.sortByPriority("low");
-        exampleToDoList.printToDoList();
+
+        //exampleToDoList.sortTasksByName("high");
+        exampleToDoList.sortTasksByDate("high");
+
+        //exampleToDoList.sortByPriority("low");
+        //exampleToDoList.printToDoList();
                 
         /*  
             datesorting

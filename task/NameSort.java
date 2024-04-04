@@ -1,25 +1,34 @@
 package task;
 import java.util.ArrayList;
 
-public class NameSort extends ToDoList{
-    //task sortArray[];
+public class NameSort {
 
-    public ArrayList<task> alphabetSort(String priorityString) {
-        ArrayList<task> holder = getOneList(priorityString);
+    public static ArrayList<task> insertionSort(ArrayList<task> base) {
         task temp;
-        for (int i = 0; i < holder.size(); i++) {
-            for (int j = i + 1; j < holder.size(); j++) {
-                if (holder.get(i).getName().compareTo(holder.get(j).getName()) > 0) {
-                    temp = holder.get(i);
-                    holder.set(i, holder.get(j));
-                    holder.set(j, temp);
+        for (int i = 0; i < base.size(); i++) {
+            for (int j = i + 1; j < base.size(); j++) {
+                if (base.get(i).getName().compareTo(base.get(j).getName()) > 0) {
+                    temp = base.get(i);
+                    base.set(i, base.get(j));
+                    base.set(j, temp);
                 }
             }
         }
-        return holder;
+        return base;
     }
 
-    public ArrayList<task> tests() {
-        return null;
+    public static void sortByNameThenPrint(ArrayList<task>[] todoList, String priorityLevel) {
+        ArrayList<task> holder = new ArrayList<task>();
+        for(int i = 0; i < todoList.length; i++) {
+            for(task task : todoList[i]) {
+                holder.add(task);
+            }
+        }
+        insertionSort(holder);
+        for(int i = 0; i < holder.size(); i++) {
+            if (priorityLevel.equalsIgnoreCase("All") || holder.get(i).getPriorityLevel().equalsIgnoreCase(priorityLevel)) {
+                System.out.println(holder.get(i).toString());
+            }  
+        }
     }
 }

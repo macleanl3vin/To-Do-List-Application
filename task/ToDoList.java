@@ -141,14 +141,14 @@ public class ToDoList {
         }
     }
 
-    public ArrayList<task> getOneList(String string) {
-        int currentArray = getPriorityIndex(string);
-        return todoList[currentArray];
-    }
     //date sort methods
     //takes either high,med,low, or all as a parameter and then sorts tasks matching that priority by date and prints
     public void sortTasksByDate(String priorityLevel) {
         DateSort.sortByDateThenPrint(todoList, priorityLevel);
+    }
+
+    public void sortTasksByName(String priorityLevel) {
+        NameSort.sortByNameThenPrint(todoList, priorityLevel);
     }
 
 
