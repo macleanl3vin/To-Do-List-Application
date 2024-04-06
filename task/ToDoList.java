@@ -8,7 +8,7 @@ public class ToDoList {
     public ToDoList() {
         todoList = new ArrayList[3]; // create and array to hold 3 ArrayLists
         for (int i = 0; i < 3; i++) {
-            todoList[i] = new ArrayList<task>(); // or new ArrayList<>()
+            todoList[i] = new ArrayList<task>();
         }
     }
 
@@ -25,18 +25,23 @@ public class ToDoList {
     }
 
     // Search method that returns the task
-    public task search(String taskName) {
+    public ArrayList<task> search(String taskName) {
+        ArrayList<task> matchingTasks = new ArrayList<>();
+
         for (int i = 0; i < todoList.length; i++) {
             ArrayList<task> tasks = todoList[i];
             for (int j = 0; j < tasks.size(); j++) {
                 task currentTask = tasks.get(j);
                 if (currentTask.getName().equals(taskName)) {
-                    return currentTask;
+                    matchingTasks.add(currentTask);
                 }
             }
         }
-        System.out.println("Task '" + taskName + "' not found.");
-        return null;
+        if (matchingTasks.isEmpty()) {
+            System.out.println("Task '" + taskName + "' not found.");
+            return null;
+        }
+        return matchingTasks;
     }
 
     // Delete method that deletes specified task
@@ -73,13 +78,23 @@ public class ToDoList {
     }
 
     public void printToDoList() {
-        for (int i = 0; i < 3; i++) {
-            for (task task : todoList[i]) {
-                System.out.println(task.toString()); // Utilize toString() method here
-            }
-            System.out.println("Total tasks in Priority Level " + i + ": " + todoList[i].size());
+        String[] priorityLevels = { "\u001B[33mHigh\u001B[0m", "\u001B[33mMedium\u001B[0m", "\u001B[33mLow\u001B[0m" };
 
+        System.out.println();
+        for (int i = 0; i < 3; i++) {
+            System.out.println("\u001B[35m-----------------------------------\u001B[0m");
+            System.out.println("\u001B[37;1mPriority Level:\u001B[0m " + priorityLevels[i]);
+            System.out.println();
+
+            for (task task : todoList[i]) {
+                System.out.println("\t" + task.toString());
+            }
+            System.out.println();
+            System.out.println(
+                    "\u001B[37;1mTotal tasks in Priority Level " + priorityLevels[i] + ": " + todoList[i].size());
+            System.out.println("\u001B[35m-----------------------------------\u001B[0m");
         }
+        System.out.println();
 
     }
 
@@ -141,8 +156,9 @@ public class ToDoList {
         }
     }
 
-    //date sort methods
-    //takes either high,med,low, or all as a parameter and then sorts tasks matching that priority by date and prints
+    // date sort methods
+    // takes either high,med,low, or all as a parameter and then sorts tasks
+    // matching that priority by date and prints
     public void sortTasksByDate(String priorityLevel) {
         DateSort.sortByDateThenPrint(todoList, priorityLevel);
     }
@@ -150,6 +166,5 @@ public class ToDoList {
     public void sortTasksByName(String priorityLevel) {
         NameSort.sortByNameThenPrint(todoList, priorityLevel);
     }
-
 
 }
