@@ -1,67 +1,125 @@
 package task;
 
-//import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        task task1 = new task("Hw", "2024-03-30", "Low");
-        task task2 = new task("Project 2", "2024-04-15", "High");
-        task task3 = new task("Study for test", "2024-04-01", "Medium");
-        task task4 = new task("Grocery shopping", "2024-03-25", "Medium");
-        task task5 = new task("Write report", "2024-04-10", "High");
-        task task6 = new task("Exercise", "2024-03-28", "Low");
-        task task7 = new task("Meeting with c", "2024-04-05", "High");
-        task task8 = new task("Call mom", "2024-03-29", "Low");
-        task task9 = new task("Read book", "2024-04-02", "Medium");
-        task task10 = new task("Clean room", "2024-03-27", "Low");
-        task task11 = new task("Plan vacation", "2024-04-20", "High");
-        task task12 = new task("Wrap presents", "2024-04-08", "Medium");
-        task task13 = new task("Pay bills", "2024-03-31", "High");
-        task task14 = new task("Attend workshop", "2024-04-03", "Medium");
-        task task15 = new task("Take out trash", "2024-03-26", "Low");
-
+        Scanner scanner = new Scanner(System.in);
         ToDoList exampleToDoList = new ToDoList();
-        exampleToDoList.addTask(task1);
-        exampleToDoList.addTask(task2);
-        exampleToDoList.addTask(task3);
-        exampleToDoList.addTask(task4);
-        exampleToDoList.addTask(task5);
-        exampleToDoList.addTask(task6);
-        exampleToDoList.addTask(task7);
-        exampleToDoList.addTask(task8);
-        exampleToDoList.addTask(task9);
-        exampleToDoList.addTask(task10);
-        exampleToDoList.addTask(task11);
-        exampleToDoList.addTask(task12);
-        exampleToDoList.addTask(task13);
-        exampleToDoList.addTask(task14);
-        exampleToDoList.addTask(task15);
 
-        // ArrayList<task> temp = exampleToDoList.getOneList("high");
+        // Prompt user for different options
+        while (true) {
+            printSeparator();
+            System.out.println("\n\u001B[1m\u001B[36mChoose an option:\u001B[0m");
+            System.out.println("\t1. Print the to-do list");
+            System.out.println("\t2. Sort tasks by priority");
+            System.out.println("\t3. Sort tasks by due date");
+            System.out.println("\t4. Search for a task");
+            System.out.println("\t5. Add a task");
+            System.out.println("\t6. Exit\n");
+            printSeparator();
+            System.out.print("\u001B[1m\u001B[36mEnter your choice: \u001B[0m");
 
-        // print sorted list
-        // for (task task : temp) {
-        // System.out.println(task.toString());
-        // }
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            printSeparator();
 
-        //exampleToDoList.sortTasksByName("high");
-        exampleToDoList.sortTasksByDate("high");
+            switch (choice) {
+                case 1:
+                    exampleToDoList.printToDoList();
+                    break;
+                case 2:
+                    System.out.print("Enter priority level (high, medium, low, or all): ");
+                    String priorityLevel = scanner.next().toLowerCase();
+                    exampleToDoList.sortByPriority(priorityLevel);
+                    break;
+                case 3:
+                    System.out.print("Enter priority level (high, medium, low, or all): ");
+                    String datePriority = scanner.next().toLowerCase();
+                    exampleToDoList.sortTasksByDate(datePriority);
+                    break;
+                case 4:
+                    System.out.print("\u001B[1m\u001B[36mEnter task name to search: \u001B[0m");
+                    String taskName = scanner.next();
+                    System.out.println();
+                    ArrayList<task> foundTasks = exampleToDoList.search(taskName);
 
-        //exampleToDoList.sortByPriority("low");
-        //exampleToDoList.printToDoList();
-                
-        /*  
-            datesorting
+                    if (!foundTasks.isEmpty()) {
+                        int namePadding = Math.max(0, 20 - foundTasks.get(0).getName().length());
 
-        //exampleToDoList.sortTasksByDate("high");
-        //exampleToDoList.sortTasksByDate("low");
-        //exampleToDoList.sortTasksByDate("medium");
-        //exampleToDoList.sortTasksByDate("all");     
-        */
+                        System.out.printf("%s%" + namePadding + "s\t%s\t%s\t%s", "\u001B[1m\u001B[34mName", "",
+                                "dueDate", "",
+                                "priorityLevel\u001B[0m\n");
+                        System.out.println("\u001B[35m-----------------------------------\u001B[0m");
 
-        // System.out.println(exampleToDoList.search("Pay bills"));
-        // exampleToDoList.alphabetSort("high");
+                        for (task foundTask : foundTasks) {
+                            System.out.println(foundTask);
+                        }
+                        System.out.println("\u001B[35m-----------------------------------\u001B[0m");
 
+                    }
+                    break;
+                case 5:
+                    addTasksToToDoList(exampleToDoList, scanner);
+                    break;
 
+                case 6:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please choose a number between 1 and 5.");
+                    break;
+            }
+        }
+    }
+
+    private static void addTasksToToDoList(ToDoList toDoList, Scanner scanner) {
+        System.out.println();
+
+        while (true) {
+            System.out.println("\u001B[1m\u001B[36mAdd Tasks to your To-Do List:\u001B[0m");
+
+            System.out.print("\t• Enter Task name (or type \u001B[32m'done'\u001B[0m to finish adding tasks): ");
+            String taskName = scanner.nextLine();
+            if (taskName.equalsIgnoreCase("done")) {
+                break;
+            }
+
+            System.out.print("\t• Enter due date (YYYY-MM-DD): ");
+            String dueDate = scanner.nextLine();
+            if (!isValidDate(dueDate)) {
+                System.out.println("\t\u001B[31mInvalid due date format. Please enter the date again.\u001B[0m");
+                continue;
+            }
+
+            System.out.print("\t• Enter priority level (high, medium, low): ");
+            String priorityLevel = scanner.nextLine();
+            if (!isValidPriority(priorityLevel)) {
+                System.out.println("\t\u001B[31mInvalid priority level. Please enter the level again.\u001B[0m");
+                continue;
+            }
+
+            task newTask = new task(taskName, dueDate, priorityLevel);
+            toDoList.addTask(newTask);
+            System.out.println("\u001B[32mTask added successfully!\u001B[0m");
+            System.err.println();
+        }
+    }
+
+    private static boolean isValidPriority(String priorityLevel) {
+        return priorityLevel.equalsIgnoreCase("high") ||
+                priorityLevel.equalsIgnoreCase("medium") ||
+                priorityLevel.equalsIgnoreCase("low");
+    }
+
+    private static boolean isValidDate(String date) {
+        // check if the date matches the format YYYY-MM-DD using reg ex
+        return date.matches("\\d{4}-\\d{2}-\\d{2}");
+    }
+
+    private static void printSeparator() {
+        System.out.println("\u001B[33m-----------------------------------------------------------\u001B[0m");
     }
 }
