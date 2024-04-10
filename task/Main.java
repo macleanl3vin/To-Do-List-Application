@@ -17,7 +17,8 @@ public class Main {
             System.out.println("\t3. Sort tasks by due date");
             System.out.println("\t4. Search for a task");
             System.out.println("\t5. Add a task");
-            System.out.println("\t6. Exit\n");
+            System.out.println("\t6. Delete a task");
+            System.out.println("\t7. Exit\n");
             printSeparator();
             System.out.print("\u001B[1m\u001B[36mEnter your choice: \u001B[0m");
 
@@ -63,8 +64,11 @@ public class Main {
                 case 5:
                     addTasksToToDoList(exampleToDoList, scanner);
                     break;
-
                 case 6:
+                    deleteTasksInToDoList(exampleToDoList, scanner);
+                    break;
+
+                case 7:
                     System.out.println("Exiting...");
                     System.exit(0);
                     break;
@@ -106,6 +110,22 @@ public class Main {
             System.out.println("\u001B[32mTask added successfully!\u001B[0m");
             System.err.println();
         }
+    }
+
+    private static void deleteTasksInToDoList(ToDoList toDoList, Scanner scanner) {
+        System.out.println();
+
+        while (true) {
+            System.out.print("\t• Enter Task name (or type \u001B[32m'done'\u001B[0m to finish deleting tasks): ");
+            String taskName = scanner.nextLine();
+            if (taskName.equalsIgnoreCase("done")) {
+                break;
+            }
+            toDoList.delete(taskName);
+            System.out.println("\u001B[32mTask deleted successfully!\u001B[0m");
+
+        }
+
     }
 
     private static boolean isValidPriority(String priorityLevel) {
