@@ -31,7 +31,7 @@ public class Main {
                     exampleToDoList.printToDoList();
                     break;
                 case 2:
-                    System.out.print("Enter priority level (high, medium, low, or all): ");
+                    System.out.print("Enter priority level (high, medium, low): ");
                     String priorityLevel = scanner.next().toLowerCase();
                     exampleToDoList.sortByPriority(priorityLevel);
                     break;
@@ -41,28 +41,10 @@ public class Main {
                     exampleToDoList.sortTasksByDate(datePriority);
                     break;
                 case 4:
-                    System.out.print("\u001B[1m\u001B[36mEnter task name to search: \u001B[0m");
-                    String taskName = scanner.next();
-                    System.out.println();
-                    ArrayList<task> foundTasks = exampleToDoList.search(taskName);
-
-                    if (!foundTasks.isEmpty()) {
-                        int namePadding = Math.max(0, 20 - foundTasks.get(0).getName().length());
-
-                        System.out.printf("%s%" + namePadding + "s\t%s\t%s\t%s", "\u001B[1m\u001B[34mName", "",
-                                "dueDate", "",
-                                "priorityLevel\u001B[0m\n");
-                        System.out.println("\u001B[35m-----------------------------------\u001B[0m");
-
-                        for (task foundTask : foundTasks) {
-                            System.out.println(foundTask);
-                        }
-                        System.out.println("\u001B[35m-----------------------------------\u001B[0m");
-
-                    }
+                    searchTasksInToDoList(exampleToDoList, scanner);
                     break;
                 case 5:
-                    addTasksToToDoList(exampleToDoList, scanner);
+                    addTasksToDoList(exampleToDoList, scanner);
                     break;
                 case 6:
                     deleteTasksInToDoList(exampleToDoList, scanner);
@@ -79,7 +61,7 @@ public class Main {
         }
     }
 
-    private static void addTasksToToDoList(ToDoList toDoList, Scanner scanner) {
+    private static void addTasksToDoList(ToDoList toDoList, Scanner scanner) {
         System.out.println();
 
         while (true) {
@@ -121,11 +103,34 @@ public class Main {
             if (taskName.equalsIgnoreCase("done")) {
                 break;
             }
-            toDoList.delete(taskName);
-            System.out.println("\u001B[32mTask deleted successfully!\u001B[0m");
+            try {
+                toDoList.delete(taskName);
+                System.out.println("\u001B[32mTask deleted successfully!\u001B[0m");
 
+            } catch (Exception e) {
+                System.out.println("\t\t\u001B[31mTask " + taskName + " not found!\u001B[0m");
+                System.out.println();
+            }
         }
+    }
 
+    private static void searchTasksInToDoList(ToDoList toDoList, Scanner scanner) {
+        System.out.println();
+
+        while (true) {
+            System.out.print("\t• Enter Task name (or type \u001B[32m'done'\u001B[0m to finish deleting tasks): ");
+            String taskName = scanner.nextLine();
+            if (taskName.equalsIgnoreCase("done")) {
+                break;
+            }
+            try {
+                toDoList.search(taskName);
+
+            } catch (Exception e) {
+                System.out.println("\t\t\u001B[31mTask " + taskName + " not found!\u001B[0m");
+                System.out.println();
+            }
+        }
     }
 
     private static boolean isValidPriority(String priorityLevel) {
