@@ -15,10 +15,11 @@ public class Main {
             System.out.println("\t1. Print the to-do list");
             System.out.println("\t2. Sort tasks by priority");
             System.out.println("\t3. Sort tasks by due date");
-            System.out.println("\t4. Search for a task");
-            System.out.println("\t5. Add a task");
-            System.out.println("\t6. Delete a task");
-            System.out.println("\t7. Exit\n");
+            System.out.println("\t4. Sort tasks by name");
+            System.out.println("\t5. Search for a task");
+            System.out.println("\t6. Add a task");
+            System.out.println("\t7. Delete a task");
+            System.out.println("\t8. Exit\n");
             printSeparator();
             System.out.print("\u001B[1m\u001B[36mEnter your choice: \u001B[0m");
 
@@ -41,16 +42,22 @@ public class Main {
                     exampleToDoList.sortTasksByDate(datePriority);
                     break;
                 case 4:
-                    searchTasksInToDoList(exampleToDoList, scanner);
+                    System.out.print("Enter priority level (high, medium, low, or all): ");
+                    String namePriority = scanner.next().toLowerCase();
+                    exampleToDoList.sortByNamePriority(namePriority);
+
                     break;
                 case 5:
-                    addTasksToDoList(exampleToDoList, scanner);
+                    searchTasksInToDoList(exampleToDoList, scanner);
                     break;
                 case 6:
+                    addTasksToDoList(exampleToDoList, scanner);
+                    break;
+                case 7:
                     deleteTasksInToDoList(exampleToDoList, scanner);
                     break;
 
-                case 7:
+                case 8:
                     System.out.println("Exiting...");
                     System.exit(0);
                     break;
@@ -115,22 +122,25 @@ public class Main {
     }
 
     private static void searchTasksInToDoList(ToDoList toDoList, Scanner scanner) {
-        System.out.println();
-
         while (true) {
+            System.out.println();
             System.out.print("\t• Enter Task name (or type \u001B[32m'done'\u001B[0m to finish deleting tasks): ");
             String taskName = scanner.nextLine();
             if (taskName.equalsIgnoreCase("done")) {
                 break;
             }
             try {
-                toDoList.search(taskName);
-
+                ArrayList<task> askObject = toDoList.search(taskName);
+                if (!askObject.isEmpty()) {
+                    System.out.println("\t\t\u001B[32mTask found successfully!\u001B[0m");
+                    System.out.println("\t\t\t" + askObject);
+                }
             } catch (Exception e) {
-                System.out.println("\t\t\u001B[31mTask " + taskName + " not found!\u001B[0m");
                 System.out.println();
+                System.out.println("\t\t\u001B[31mAn Error occured!\u001B[0m");
             }
         }
+
     }
 
     private static boolean isValidPriority(String priorityLevel) {

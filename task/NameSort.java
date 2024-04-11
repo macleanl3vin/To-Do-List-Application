@@ -18,6 +18,7 @@ public class NameSort {
         return base;
     }
 
+    // Sorts all tasks by name
     public static void sortByNameThenPrint(ArrayList<task>[] todoList, String priorityLevel) {
         ArrayList<task> holder = new ArrayList<task>();
         for (int i = 0; i < todoList.length; i++) {
@@ -25,43 +26,24 @@ public class NameSort {
                 holder.add(task);
             }
         }
-        insertionSort(holder);
-        for (int i = 0; i < holder.size(); i++) {
-            if (priorityLevel.equalsIgnoreCase("All")
-                    || holder.get(i).getPriorityLevel().equalsIgnoreCase(priorityLevel)) {
-                System.out.println(holder.get(i).toString());
-            }
-        }
-
     }
 
+    public static void sortByNamePriority(ArrayList<task>[] todoList, String priorityLevel) {
+        ArrayList<task> holder = new ArrayList<>();
+        for (ArrayList<task> tasks : todoList) {
+            for (task t : tasks) {
+                if (t.getPriorityLevel().equalsIgnoreCase(priorityLevel)) {
+                    holder.add(t);
+                }
+            }
+        }
+        insertionSort(holder);
+        int priorityIndex = ToDoList.getPriorityIndex(priorityLevel);
+
+        todoList[priorityIndex].clear();
+
+        for (task task : holder) {
+            todoList[priorityIndex].add(task);
+        }
+    }
 }
-
-// public static void sortByNameThenPrint(ArrayList<task>[] todoList, String
-// priorityLevel) {
-// ArrayList<task> holder = new ArrayList<task>();
-// for (int i = 0; i < todoList.length; i++) {
-// for (task task : todoList[i]) {
-// holder.add(task);
-// }
-// }
-// holder = insertionSort(holder); // Sorting holder using insertion sort
-
-// // Replace the original todoList with the sorted holder
-// for (int i = 0; i < todoList.length; i++) {
-// todoList[i].clear();
-// }
-// for (task t : holder) {
-// int priorityIndex = getPriorityIndex(t.getPriorityLevel());
-// todoList[priorityIndex].add(t); // Adding sorted tasks back to todoList based
-// on priority level
-// }
-
-// // Printing sorted list based on priority level
-// for (int i = 0; i < holder.size(); i++) {
-// if (priorityLevel.equalsIgnoreCase("All")
-// || holder.get(i).getPriorityLevel().equalsIgnoreCase(priorityLevel)) {
-// System.out.println(holder.get(i).toString());
-// }
-// }
-// }
