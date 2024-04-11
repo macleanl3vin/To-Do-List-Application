@@ -6,15 +6,7 @@ public class DateSort {
     public static void sortByDateThenPrint(ArrayList<task>[] todoList, String priorityLevel) {
         ArrayList<task> temp = new ArrayList<task>();
 
-        // for (int i = 0; i < todoList.length; i++) {
-        // for (task task : todoList[i]) {
-        // temp.add(task);
-        // }
-        // }
-
-        // Iterate through each task in the specified priority level and add them to
-        // temp
-        int priorityIndex = getPriorityIndex(priorityLevel);
+        int priorityIndex = ToDoList.getPriorityIndex(priorityLevel);
         if (priorityIndex != -1) {
             for (task task : todoList[priorityIndex]) {
                 temp.add(task);
@@ -36,29 +28,8 @@ public class DateSort {
             for (task task : temp) {
                 todoList[priorityIndex].add(task);
             }
-            System.out.println("\u001B[32mTo-Do-List sorted successfully!\u001B[0m");
-        }
-
-        // Print sorted list based on priority level
-        // not sure if this is still necessary
-        for (task task : todoList[priorityIndex]) {
-            if (task.getPriorityLevel().equalsIgnoreCase(priorityLevel)) {
-                System.out.println(task);
-            }
-        }
-
-    }
-
-    private static int getPriorityIndex(String priorityLevel) {
-        switch (priorityLevel.toLowerCase()) {
-            case "high":
-                return 0;
-            case "medium":
-                return 1;
-            case "low":
-                return 2;
-            default:
-                return -1;
+            System.out.println("\t\u001B[32mTo-Do-List sorted by due-date successfully!\u001B[0m");
+            System.out.println();
         }
     }
 }
