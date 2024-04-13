@@ -37,9 +37,6 @@ public class NameSort {
                 }
             }
         }
-
-        
-
         insertionSort(holder);
         int priorityIndex = ToDoList.getPriorityIndex(priorityLevel);
 
@@ -48,6 +45,5 @@ public class NameSort {
         for (task task : holder) {
             todoList[priorityIndex].add(task);
         }
-
     }
 }
