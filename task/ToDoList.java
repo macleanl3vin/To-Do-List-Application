@@ -1,5 +1,7 @@
 package task;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ToDoList {
@@ -200,4 +202,26 @@ public class ToDoList {
             System.out.println("\t\u001B[32mTo-Do-List sorted by name successfully!\u001B[0m");
         }
     }
+
+    public void writeToFile() {
+        String filePath = "task/data/TaskFile.txt";
+
+        try {
+            FileWriter writer = new FileWriter(filePath);
+            for (ArrayList<task> tasks : todoList) {
+                for (task task : tasks) {
+                    // Ensure the original format is maintained: task, date, priority
+                    String line = task.getName() + ", " + task.getDueDate() + ", " + task.getPriorityLevel();
+                    writer.write(line + System.lineSeparator());
+                }
+            }
+            writer.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the file.");
+            e.printStackTrace();
+        }
+    }
+
+
 }

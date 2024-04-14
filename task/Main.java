@@ -8,6 +8,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ToDoList exampleToDoList = new ToDoList();
 
+        FileIO.readFile(exampleToDoList);
         // Prompt user for different options
         while (true) {
             printSeparator();
@@ -58,7 +59,8 @@ public class Main {
                     break;
 
                 case 8:
-                    System.out.println("Exiting...");
+                    exampleToDoList.writeToFile();
+                    System.out.println("Saving and Exiting...");
                     System.exit(0);
                     break;
                 default:
