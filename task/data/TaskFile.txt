@@ -1,0 +1,19 @@
+Paper, 2024-04-13, high
+Project, 2024-04-26, high
+research, 2024-04-19, high
+Attend meeting, 2024-04-25, high
+Write code, 2024-04-17, high
+Pay bills, 2024-04-20, high
+Presentation, 2024-04-28, medium
+Study for exam, 2024-04-21, medium
+Call mom, 2024-04-23, medium
+Read book, 2024-04-14, medium
+Go for a run, 2024-04-24, medium
+Cook dinner, 2024-04-27, medium
+Review notes, 2024-04-22, medium
+Do laundry, 2024-04-15, low
+Exercise, 2024-04-16, low
+Buy groceries, 2024-04-18, low
+Clean room, 2024-04-12, low
+Take out trash, 2024-04-11, low
+Watch movie, 2024-04-29, low
