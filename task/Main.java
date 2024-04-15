@@ -1,12 +1,17 @@
 package task;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ToDoList exampleToDoList = new ToDoList();
+        readFile(exampleToDoList);
 
         // Prompt user for different options
         while (true) {
@@ -59,10 +64,11 @@ public class Main {
 
                 case 8:
                     System.out.println("Exiting...");
+                    writeFile(exampleToDoList);
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Invalid choice. Please choose a number between 1 and 5.");
+                    System.out.println("Invalid choice. Please choose a number between 1 and 8.");
                     break;
             }
         }
@@ -156,5 +162,49 @@ public class Main {
 
     private static void printSeparator() {
         System.out.println("\u001B[33m-----------------------------------------------------------\u001B[0m");
+    }
+
+    public static void readFile(ToDoList baseList) {
+        File file = new File(".");
+        for(String fileNames : file.list()) System.out.println(fileNames);
+        try {
+            File obj = new File("TaskFile.txt");
+            Scanner reader = new Scanner(obj);
+            while(reader.hasNextLine()) {
+                String data = reader.nextLine();
+                String[] dataTasks = data.split("; ");
+                for(int i = 0; i < dataTasks.length; i++) {
+                    String[] taskElems = dataTasks[i].split(", ");
+                    String[] prio = taskElems[2].split(";");
+                    String date = taskElems[0];
+                    String name = taskElems[1];
+                    String priority = prio[0];
+                    task tempTask = new task(name, date, priority);
+                    baseList.addTask(tempTask);
+                }
+            }
+            reader.close();
+        } catch(FileNotFoundException e) {
+            System.out.println("A Save File Read Error Has Occured");
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeFile(ToDoList baseList) {
+        try {
+            FileWriter writer = new FileWriter("TaskFile.txt");
+            for(int i = 0; i < 3; i++) {
+                ArrayList<task> tasks = baseList.getTasks(i);
+                for(int j = 0; j < tasks.size(); j++) {
+                    task currentTask = tasks.get(j);
+                    writer.write("" + currentTask.getDueDate() + ", " + currentTask.getName() + ", " + currentTask.getPriorityLevel() + "; ");
+                }
+                writer.write("\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("A Save File Write Error Has Occured");
+            e.printStackTrace();
+        }
     }
 }

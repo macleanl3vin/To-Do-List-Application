@@ -200,4 +200,9 @@ public class ToDoList {
             System.out.println("\t\u001B[32mTo-Do-List sorted by name successfully!\u001B[0m");
         }
     }
+
+    public ArrayList<task> getTasks(int i) {
+        return todoList[i];
+    }
+
 }
