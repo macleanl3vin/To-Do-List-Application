@@ -40,7 +40,11 @@ public class Main {
                 case 3:
                     System.out.print("Enter priority level (high, medium, low, or all): ");
                     String datePriority = scanner.next().toLowerCase();
-                    exampleToDoList.sortTasksByDate(datePriority);
+                    if (datePriority.equals("all")) {
+                        exampleToDoList.sortTasksByDateAll();
+                    } else {
+                        exampleToDoList.sortTasksByDate(datePriority);
+                    }
                     break;
                 case 4:
                     System.out.print("Enter priority level (high, medium, low, or all): ");
