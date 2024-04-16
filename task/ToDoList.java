@@ -193,9 +193,13 @@ public class ToDoList {
     // takes either high,med,low, or all as a parameter and then sorts tasks
     // matching that priority by date and prints
     public void sortTasksByDate(String priorityLevel) {
-        DateSort.sortByDateThenPrint(todoList, priorityLevel);
+        DateSort.sortByDate(todoList, priorityLevel);
     }
 
+    public void sortTasksByDateAll() {
+        DateSort.sortByDateAll(todoList);
+    }
+    
     public void sortByNamePriority(String priorityLevel) {
         if (!priorityLevel.equals("all")) {
             NameSort.sortByNamePriority(todoList, priorityLevel);
