@@ -28,7 +28,7 @@ public class task {
     }
 
     public String getPriorityLevel() {
-        return priorityLevel.toLowerCase().trim(); // Ensure lowercase and trimmed
+        return priorityLevel.toLowerCase().trim();
     }
 
     public void setPriorityLevel(String priorityLevel) {

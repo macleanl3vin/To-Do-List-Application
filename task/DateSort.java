@@ -3,24 +3,18 @@ package task;
 import java.util.ArrayList;
 
 public class DateSort {
-    
-    
-    
-    public static void sortByDateAll(ArrayList<task>[] todoList) {
-        // Sort all priority levels
-        for (String level : new String[]{"high", "medium", "low"}) {
-            sortByDate(todoList, level);
+    // Sort all priority levels
+    public static void sortByDateAll(ArrayList<task>[] toDoList) {
+        for (String level : new String[] { "high", "medium", "low" }) {
+            sortByDate(toDoList, level);
         }
     }
-    
-    
-    
-    
-    
-    public static void sortByDate(ArrayList<task>[] todoList, String priorityLevel) {
+
+    public static void sortByDate(ArrayList<task>[] toDoList, String priorityLevel) {
         int priorityIndex = ToDoList.getPriorityIndex(priorityLevel);
+
         if (priorityIndex != -1) {
-            ArrayList<task> tasks = todoList[priorityIndex];
+            ArrayList<task> tasks = toDoList[priorityIndex];
             // Bubble sort tasks list by the due date
             int n = tasks.size();
             for (int i = 0; i < n - 1; i++) {
@@ -39,4 +33,3 @@ public class DateSort {
         }
     }
 }
-
