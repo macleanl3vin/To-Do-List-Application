@@ -74,6 +74,7 @@ public class Main {
         }
     }
 
+    // Method to add tasks to the to-do list
     private static void addTasksToDoList(ToDoList toDoList, Scanner scanner) {
         System.out.println();
 
@@ -136,10 +137,10 @@ public class Main {
                 break;
             }
             try {
-                ArrayList<task> askObject = toDoList.search(taskName);
-                if (!askObject.isEmpty()) {
+                ArrayList<task> searchTask = toDoList.search(taskName);
+                if (!searchTask.isEmpty()) {
                     System.out.println("\t\t\u001B[32mTask found successfully!\u001B[0m");
-                    System.out.println("\t\t\t" + askObject);
+                    System.out.println("\t\t\t" + searchTask);
                 }
             } catch (Exception e) {
                 System.out.println();
@@ -156,7 +157,8 @@ public class Main {
     }
 
     private static boolean isValidDate(String date) {
-        // check if the date matches the format YYYY-MM-DD using reg ex
+        // check if the date matches the format YYYY-MM-DD using regular expression
+        // pattern
         return date.matches("\\d{4}-\\d{2}-\\d{2}");
     }
 
