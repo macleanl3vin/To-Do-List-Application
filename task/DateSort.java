@@ -27,9 +27,6 @@ public class DateSort {
                     }
                 }
             }
-
-            System.out.println("\t\u001B[32mTo-Do-List sorted by due-date successfully!\u001B[0m");
-            System.out.println();
         }
     }
 }
