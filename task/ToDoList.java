@@ -213,14 +213,21 @@ public class ToDoList {
     // matching that priority by date and prints
     public void sortTasksByDate(String priorityLevel) {
         DateSort.sortByDate(toDoList, priorityLevel);
+        System.out.println("\t\u001B[32mTo-Do-List sorted by due-date successfully!\u001B[0m");
+        System.out.println();
     }
 
     public void sortTasksByDateAll() {
         DateSort.sortByDateAll(toDoList);
+        System.out.println("\t\u001B[32mTo-Do-List sorted by due-date successfully!\u001B[0m");
+        System.out.println();
     }
 
     public void sortByNamePriority(String priorityLevel) {
-        if (!priorityLevel.equals("all")) {
+        if (priorityLevel.equalsIgnoreCase("all")) {
+            NameSort.sortByNameAll(toDoList);
+            System.out.println("\t\u001B[32mTo-Do-List sorted by name successfully!\u001B[0m");
+        } else {
             NameSort.sortByNamePriority(toDoList, priorityLevel);
             System.out.println("\t\u001B[32mTo-Do-List sorted by name successfully!\u001B[0m");
         }

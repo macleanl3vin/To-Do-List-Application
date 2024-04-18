@@ -50,7 +50,6 @@ public class Main {
                     System.out.print("Enter priority level (high, medium, low, or all): ");
                     String namePriority = scanner.next().toLowerCase();
                     exampleToDoList.sortByNamePriority(namePriority);
-
                     break;
                 case 5:
                     searchTasksInToDoList(exampleToDoList, scanner);
@@ -68,7 +67,7 @@ public class Main {
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Invalid choice. Please choose a number between 1 and 5.");
+                    System.out.println("Invalid choice. Please choose a number between 1 and 8.");
                     break;
             }
         }

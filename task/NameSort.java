@@ -9,7 +9,7 @@ public class NameSort {
 
         for (int i = 0; i < base.size(); i++) {
             for (int j = i + 1; j < base.size(); j++) {
-                if (base.get(i).getName().compareTo(base.get(j).getName()) > 0) {
+                if (base.get(i).getName().compareToIgnoreCase(base.get(j).getName()) > 0) {
                     temp = base.get(i);
                     base.set(i, base.get(j));
                     base.set(j, temp);
@@ -50,5 +50,12 @@ public class NameSort {
             todoList[priorityIndex].add(task);
         }
 
+    }
+
+    //sort all (individually)
+    public static void sortByNameAll(ArrayList<task>[] toDoList) {
+        for (String level : new String[] { "high", "medium", "low" }) {
+            sortByNamePriority(toDoList, level);
+        }
     }
 }
